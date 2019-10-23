@@ -3,10 +3,8 @@ import React from 'react';
 import {
   Image,
   ImageBackground,
-  Platform,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 
