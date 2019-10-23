@@ -1,20 +1,19 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
-  Button,
   Image,
   ImageBackground,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+import { MonoText, NeonText } from '../components/StyledText';
 import Logo from '../assets/images/tarot-logo.png'
 import Background from '../assets/images/phone-back.png'
+import { Introduction, PrimaryButton, Title } from '../components'
 
 export default function HomeScreen() {
   return (
@@ -31,18 +30,9 @@ export default function HomeScreen() {
               source={ Logo }
               style={styles.welcomeImage}
             />
-          </View>
-
-          <View style={styles.helpContainer}>
-            <Text style={styles.welcomeText}>
-              Welcome to my online reading room. I am Sybil, Seer and high Priestess of Seidr-the ancient Norse magick religion. I am a descendant of Freja, Goddess of beauty, love, war, and death, leader of the Valkyries. I was born with the gift of prophecy and magick.
-            </Text>
-            <Button title={'Deal'} onPress={() => console.log('Deal card')}/>
-            <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
+            <Title />
+            <Introduction />
+            <PrimaryButton  onPress={() => console.log('Deal card')}  />
           </View>
         </ScrollView>
 
@@ -53,9 +43,9 @@ export default function HomeScreen() {
 
           <View
             style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>
+            <NeonText style={styles.codeHighlightText}>
               navigation/MainTabNavigator.js
-            </MonoText>
+            </NeonText>
           </View>
         </View>
       </View>
@@ -86,8 +76,15 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     color: '#fff',
-    paddingLeft: 20,
-    paddingRight: 20,
+    margin: 20,
+    fontSize: 17,
+  },
+  instructions: {
+    color: '#fff',
+    margin: 10,
+    marginLeft: 15,
+    marginRight: 20,
+    fontSize: 17,
   },
   contentContainer: {
     paddingTop: 30,
@@ -104,15 +101,9 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
   codeHighlightText: {
     color: 'rgba(96,100,109, 0.8)',
+    fontSize: 20,
   },
   codeHighlightContainer: {
     backgroundColor: 'rgba(0,0,0,0.05)',
