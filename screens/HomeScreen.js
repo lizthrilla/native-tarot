@@ -31,22 +31,16 @@ export default function HomeScreen() {
     }
   }
 
-  // const deal = () => {
-  //   // move a card from the top of cards to dealt
-  //   this.setState({
-  //     dealt: [
-  //       ...this.state.dealt,
-  //       ...this.state.cards.slice(0, 1)
-  //     ],
-  //     cards: this.state.cards.slice(1)
-  //   })
-  // }
-
   const onDeal = () => {
-    if (dealScreen) {
+    if (dealScreen && dealtCards.length < 3) {
       const dealt = [...dealtCards, ...shuffledCards.slice(0,1)]
+      const cards = shuffledCards.slice(1)
       setDealtCards(dealt)
-      console.log(dealtCards)
+      setShuffledCards(cards)
+    } else if (dealtCards.length === 3) {
+      setDealScreen(false)
+      setShuffledCards(shuffleArray(Data.cards))
+      setDealtCards([])
     } else {
       setDealScreen(true)
     }
