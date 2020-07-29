@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   ImageBackground,
@@ -11,9 +11,48 @@ import {
 import { MonoText, NeonText } from '../components/StyledText';
 import Logo from '../assets/images/tarot-logo.png'
 import Background from '../assets/images/phone-back.png'
-import { Introduction, PrimaryButton, Title } from '../components'
+import { DealScreen, Introduction, PrimaryButton, Title } from '../components'
+import Data from "../assets/images/Data"
 
 export default function HomeScreen() {
+  const [dealScreen, setDealScreen] = useState(false)
+  const [dealtCards, setDealtCards] = useState([])
+  const [shuffledCards, setShuffledCards] = useState([])
+
+  useEffect(() => {
+    shuffleArray(Data.cards)
+  }), [];
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+        setShuffledCards(array)
+    }
+  }
+
+  // const deal = () => {
+  //   // move a card from the top of cards to dealt
+  //   this.setState({
+  //     dealt: [
+  //       ...this.state.dealt,
+  //       ...this.state.cards.slice(0, 1)
+  //     ],
+  //     cards: this.state.cards.slice(1)
+  //   })
+  // }
+
+  const onDeal = () => {
+    if (dealScreen) {
+      const dealt = [...dealtCards, ...shuffledCards.slice(0,1)]
+      setDealtCards(dealt)
+      console.log(dealtCards)
+    } else {
+      setDealScreen(true)
+    }
+    console.log(shuffledCards)
+  }
+
   return (
     <ImageBackground 
         source={Background}
@@ -29,8 +68,9 @@ export default function HomeScreen() {
               style={styles.welcomeImage}
             />
             <Title />
-            <Introduction />
-            <PrimaryButton  onPress={() => console.log('Deal card')}  />
+            {!dealScreen && <Introduction />}
+            {dealScreen && <DealScreen cards={dealtCards}/>}
+            <PrimaryButton  onPress={() => onDeal()}  />
           </View>
         </ScrollView>
       </View>
