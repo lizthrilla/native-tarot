@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     header: {
       color: '#fff',
       margin: '1rem',
-      fontSize: '1.5rem'
+      fontSize: 15
     },
     text: {
       color: "#fff",
       margin: '1rem',
-      fontSize: '1rem'
+      fontSize: 15
     }
 });

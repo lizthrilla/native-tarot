@@ -8,10 +8,10 @@ const Card = ({fortune, description, image, title}) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.card} onPress={() => setReadInformation(!readInformation)}>
-                <View style={styles.textBox}>
-                    <Text style={[styles.text, {fontFamily: 'Caudex_400Regular'}, {fontWeight: 'bold'}]}>{title}</Text>
-                    <Text style={[styles.text, {fontFamily: 'Caudex_400Regular'}]}>{description}</Text>
-                    <Text style={[styles.text, {fontFamily: 'Caudex_400Regular'}]}>{fortune}</Text>
+                <View style={readInformation ? styles.textBox : styles.hiddenTextBox}>
+                    <Text style={styles.text}>{title}</Text>
+                    <Text style={styles.text}>{description}</Text>
+                    <Text style={styles.text}>{fortune}</Text>
                 </View>
                 <Image source={image} style={readInformation ? styles.cardOverlay : styles.cardImage}/>
             </TouchableOpacity>
@@ -24,45 +24,49 @@ export default Card
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        height: '100%',
-        margin: '1rem'
+        // height: '100%',
+        margin: 10
     },
     card: {
-        height: '25rem',
-        width: '15rem',
+        height: 385,
+        width: 225,
         borderRadius: 10,
         backgroundColor: "#000",
         position: 'relative'
     },
     cardImage: {
-        height: '100%',
+        height: 385,
+        width: 225,
         borderRadius: 10,
-        borderWidth: '1px',
+        borderWidth: 1,
         borderColor: "#fff"
     },
     cardOverlay: {
-        height: '25rem',
-        width: '15rem',
+        height: 385,
+        width: 225,
         opacity: 0.1,
         backgroundColor: '#000',
         borderRadius: 10,
-        borderWidth: '1px',
+        borderWidth: 1,
         borderColor: "#fff",
     },
     textBox: {
-        height: '25rem',
-        width: '15rem',
+        height: 385,
+        width: 225,
         position: 'absolute',
-        padding: "0.5rem",
+        padding: 5,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "flex-start",
         alignItems: "flex-start",
         borderRadius: 10,
     },
+    hiddenTextBox: {
+        display: 'none'
+    },
     text: {
         color: '#fff',
-        marginBottom: '0.5rem',
-        fontSize: '1rem'
+        marginBottom: 15,
+        fontSize: 15
     }
 })
