@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -29,6 +30,14 @@ HomeStack.navigationOptions = {
       style={{ height: 14, width: 14}} 
     />
   ),
+  tabBarOptions: {
+    // showLabel: false, // hide labels
+    activeTintColor: '#00c9ff', // active icon color
+    inactiveTintColor: '#586589',  // inactive icon color
+    style: {
+        backgroundColor: '#171F33' // TabBar background
+    }
+  }
 };
 
 HomeStack.path = '';
@@ -45,6 +54,14 @@ LinksStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),
+  tabBarOptions: {
+    // showLabel: false, // hide labels
+    activeTintColor: '#00c9ff', // active icon color
+    inactiveTintColor: '#586589',  // inactive icon color
+    style: {
+        backgroundColor: '#171F33' // TabBar background
+    }
+  }
 };
 
 LinksStack.path = '';
@@ -61,6 +78,14 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-book' : 'md-book'} />
   ),
+  tabBarOptions: {
+    // showLabel: false, // hide labels
+    activeTintColor: '#00c9ff', // active icon color
+    inactiveTintColor: '#586589',  // inactive icon color
+    style: {
+        backgroundColor: '#171F33' // TabBar background
+    }
+  }
 };
 
 SettingsStack.path = '';
@@ -68,7 +93,7 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  SettingsStack,
+  SettingsStack
 });
 
 tabNavigator.path = '';

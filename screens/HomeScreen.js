@@ -19,10 +19,9 @@ export default function HomeScreen() {
 
   useEffect(() => {
     if (dealScreen) {
-
       shuffleArray(Data.cards)
     }
-    console.log("hit")
+
   }), [dealScreen];
 
   const shuffleArray = (array) => {
