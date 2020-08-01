@@ -4,13 +4,26 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {
+  useFonts,
+  Caudex_400Regular,
+  Caudex_400Regular_Italic,
+  Caudex_700Bold,
+  Caudex_700Bold_Italic,
+} from '@expo-google-fonts/caudex';
 
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
+  let [fontsLoaded] = useFonts({
+    Caudex_400Regular,
+    Caudex_400Regular_Italic,
+    Caudex_700Bold,
+    Caudex_700Bold_Italic,
+  });
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
+  if (!isLoadingComplete && !props.skipLoadingScreen && !fontsLoaded) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}

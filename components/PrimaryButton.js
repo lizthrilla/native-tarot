@@ -5,13 +5,13 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-const PrimaryButton = ({ onPress }) => {
+const PrimaryButton = ({ onPress, buttonText }) => {
     return (
         <TouchableOpacity 
             style={styles.dealButton}
             onPress={onPress}
         >
-            <Text>Deal</Text>
+            <Text style={[styles.buttonText, {fontFamily: 'Caudex_700Bold'}]}>{buttonText}</Text>
         </TouchableOpacity>
     )
 }
@@ -22,11 +22,16 @@ const styles = StyleSheet.create({
     dealButton: {
         alignItems: 'center',
         backgroundColor: '#00c9ff',
-        color: '#fff',
-        flex: 1,
+        marginTop: '2rem',
         height: 50,
         justifyContent: 'center',
         width: 100,
-        borderRadius: 10
+        borderRadius: 10,
     },
+    buttonText: {
+        color: "#fff",
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        fontFamiy: 'Caudex_700Bold'
+    }
 })

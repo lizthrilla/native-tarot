@@ -7,8 +7,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-
-import { MonoText, NeonText } from '../components/StyledText';
 import Logo from '../assets/images/tarot-logo.png'
 import Background from '../assets/images/phone-back.png'
 import { DealScreen, Introduction, PrimaryButton, Title } from '../components'
@@ -20,8 +18,12 @@ export default function HomeScreen() {
   const [shuffledCards, setShuffledCards] = useState([])
 
   useEffect(() => {
-    shuffleArray(Data.cards)
-  }), [];
+    if (dealScreen) {
+
+      shuffleArray(Data.cards)
+    }
+    console.log("hit")
+  }), [dealScreen];
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -34,19 +36,20 @@ export default function HomeScreen() {
   const onDeal = () => {
     if (dealScreen && dealtCards.length < 3) {
       const dealt = [...dealtCards, ...shuffledCards.slice(0,1)]
-      const cards = shuffledCards.slice(1)
+      const cards = shuffledCards.slice(0)
       setDealtCards(dealt)
       setShuffledCards(cards)
     } else if (dealtCards.length === 3) {
       setDealScreen(false)
       setShuffledCards(shuffleArray(Data.cards))
       setDealtCards([])
+
     } else {
       setDealScreen(true)
     }
-    console.log(shuffledCards)
   }
 
+  const buttonText = dealtCards.length === 3 ? "New Cards" : "Deal"
   return (
     <ImageBackground 
         source={Background}
@@ -64,7 +67,7 @@ export default function HomeScreen() {
             <Title />
             {!dealScreen && <Introduction />}
             {dealScreen && <DealScreen cards={dealtCards}/>}
-            <PrimaryButton  onPress={() => onDeal()}  />
+            <PrimaryButton  onPress={() => onDeal()}  buttonText={buttonText}/>
           </View>
         </ScrollView>
       </View>
@@ -79,18 +82,6 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  welcomeText: {
-    color: '#fff',
-    margin: 20,
-    fontSize: 17,
-  },
-  instructions: {
-    color: '#fff',
-    margin: 10,
-    marginLeft: 15,
-    marginRight: 20,
-    fontSize: 17,
   },
   contentContainer: {
     paddingTop: 30,
